@@ -10,11 +10,14 @@ import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
+import csv
 
+NUMBER_OF_COLUMNS = 9
 
+file_path_csv = './indian_diabetes.csv'
+file_path = './indian_diabetes.xlsx'
 
-df =  pd.read_excel('F:\Cours PYTHON\indian diabetes.xlsx') 
-
+df = pd.read_excel(file_path)
 df.head()
 
 X = df.loc[:, df.columns != 'DiabetesPresence']
