@@ -84,6 +84,20 @@ print('Accuracy: %.2f' % (accuracy*100))
 
 # Ajouter des couches
 
+# Scatter plot and regression line
+feature_index = 0 # Choose the first characteristic for visualization
+feature_name = X.columns[feature_index] # and get characteristic name
+
+# draw the scatter plot
+plt.scatter(X_test.iloc[:, feature_index], Y_test, color='blue', label='Data')
+# draw the regression line
+plt.plot(X_test.iloc[:, feature_index], model.predict(X_test), color='red', label='Regression line')
+# add labels, title, and legend
+plt.xlabel(feature_name)
+plt.ylabel('DiabetesPresence')
+plt.title('Nuage de points et droite de régression')
+plt.legend()
+plt.show()
 
 
 
