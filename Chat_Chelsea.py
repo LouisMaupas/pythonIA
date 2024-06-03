@@ -12,7 +12,7 @@ import time
 
 # load image and shrink
 
-img = cv2.imread('F:\Cours PYTHON/chelsea.png')
+img = cv2.imread('./chelsea.png')
 cv2.imshow("chelsea",img)
 
 img = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
