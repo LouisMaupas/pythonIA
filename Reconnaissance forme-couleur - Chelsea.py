@@ -67,7 +67,7 @@ class ShapeDetector:
 if __name__ == '__main__':
     # load the image and resize it to a smaller factor so that
     # the shapes can be approximated better
-    image = cv2.imread('F:\Cours PYTHON\chelsea.PNG')
+    image = cv2.imread('./chelsea.PNG')
     resized = imutils.resize(image, width=300)
     ratio = image.shape[0] / float(resized.shape[0]) 
     
