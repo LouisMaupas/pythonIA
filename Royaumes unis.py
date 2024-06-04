@@ -12,7 +12,7 @@ import time
 
 # load image and shrink - it's massive
 
-img = cv2.imread('F:\Cours PYTHON/UK1.png')
+img = cv2.imread('UK1.png')
 
 img = cv2.resize(img, None,fx=0.3, fy=0.3, interpolation = cv2.INTER_CUBIC)
 
