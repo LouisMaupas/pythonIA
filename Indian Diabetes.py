@@ -7,6 +7,9 @@ Created on Thu Jun 22 15:54:24 2023
 
 from matplotlib import pyplot as plt
 import pandas as pd
+import numpy as np
+
+from sklearn.linear_model import LinearRegression
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
@@ -14,31 +17,107 @@ from tensorflow.keras.utils import plot_model
 # faire afficher le nuages de données
 # générer un partionnement du nuage
 
-df =  pd.read_excel('F:\Cours PYTHON\indian diabetes.xlsx') 
+df =  pd.read_excel('indian diabetes.xlsx') 
 print(df)
+
+# Fonction pour tracer la droite de régression
+def plot_regression_line(x, y):
+    # Conversion en tableau numpy
+    x = np.array(x).reshape(-1, 1)
+    y = np.array(y)
+    # Créer le modèle de régression linéaire
+    reg = LinearRegression().fit(x, y)
+    # Prédire les valeurs y à partir des valeurs x
+    y_pred = reg.predict(x)
+    # Tracer la ligne de régression
+    plt.plot(x, y_pred, color='red', linewidth=2, label='Regression line')
+
+# Nuage de points Age vs Glucose avec droite de régression
 x = df.Age
 y = df.Glucose
-fig = plt.figure(figsize =(20,10))
-plt.plot(x,y,"ob") # point bleu
+fig = plt.figure(figsize=(20, 10))
+plt.plot(x, y, "ob")  # point bleu
+plot_regression_line(x, y)
 plt.xlabel('Age')
 plt.ylabel('Taux Glucose')
-
+plt.legend()
 plt.show()
 
+# Nuage de points Age vs BloodPressure avec droite de régression
 x = df.Age
 z = df.BloodPressure
-fig = plt.figure(figsize =(20,10))
-plt.plot(x,z,"ob") # point bleu
+fig = plt.figure(figsize=(20, 10))
+plt.plot(x, z, "ob")  # point bleu
+plot_regression_line(x, z)
 plt.xlabel('Age')
 plt.ylabel('Pression sanguine')
+plt.legend()
 plt.show()
 
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Jun 22 15:54:24 2023
+
+@author: bebo
+"""
+
+from matplotlib import pyplot as plt
+import pandas as pd
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.utils import plot_model
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# faire afficher le nuages de données
+# générer un partitionnement du nuage
+
+df = pd.read_excel('indian diabetes.xlsx')
+print(df)
+
+# Fonction pour tracer la droite de régression
+def plot_regression_line(x, y):
+    # Conversion en tableau numpy
+    x = np.array(x).reshape(-1, 1)
+    y = np.array(y)
+    # Créer le modèle de régression linéaire
+    reg = LinearRegression().fit(x, y)
+    # Prédire les valeurs y à partir des valeurs x
+    y_pred = reg.predict(x)
+    # Tracer la ligne de régression
+    plt.plot(x, y_pred, color='red', linewidth=2, label='Regression line')
+
+# Nuage de points Age vs Glucose avec droite de régression
+x = df.Age
+y = df.Glucose
+fig = plt.figure(figsize=(20, 10))
+plt.plot(x, y, "ob")  # point bleu
+plot_regression_line(x, y)
+plt.xlabel('Age')
+plt.ylabel('Taux Glucose')
+plt.legend()
+plt.show()
+
+# Nuage de points Age vs BloodPressure avec droite de régression
+x = df.Age
+z = df.BloodPressure
+fig = plt.figure(figsize=(20, 10))
+plt.plot(x, z, "ob")  # point bleu
+plot_regression_line(x, z)
+plt.xlabel('Age')
+plt.ylabel('Pression sanguine')
+plt.legend()
+plt.show()
+
+# Nuage de points Glucose vs BloodPressure avec droite de régression
 y = df.Glucose
 z = df.BloodPressure
-fig = plt.figure(figsize =(20,10))
-plt.plot(y,z,"ob") # point bleu
-plt.ylabel('Glucose')
-plt.xlabel('Pression sanguine')
+fig = plt.figure(figsize=(20, 10))
+plt.plot(y, z, "ob")  # point bleu
+plot_regression_line(y, z)
+plt.xlabel('Taux Glucose')
+plt.ylabel('Pression sanguine')
+plt.legend()
 plt.show()
 
 
@@ -52,7 +131,6 @@ model.add(Dense(12, input_shape=(8,), activation='relu'))
 model.add(Dense(8, activation='relu'))
 model.add(Dense(8, activation='relu')) # essai couche en plus
 model.add(Dense(8, activation='relu')) # essai couche en plus
-
 model.add(Dense(1, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
