@@ -1,1 +1,2 @@
-Afficher nuages de données + droite de régression
+1) Afficher nuages de données + droite de régression
+2) faire du clustering en python 
