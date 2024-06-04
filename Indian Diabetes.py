@@ -13,10 +13,10 @@ from sklearn.linear_model import LinearRegression
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.utils import plot_model
+from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
 
-# faire afficher le nuages de données
-# générer un partionnement du nuage
-
+# Charger les données
 df =  pd.read_excel('indian diabetes.xlsx') 
 print(df)
 
@@ -31,6 +31,26 @@ def plot_regression_line(x, y):
     y_pred = reg.predict(x)
     # Tracer la ligne de régression
     plt.plot(x, y_pred, color='red', linewidth=2, label='Regression line')
+
+# Clustering avec K-means
+def plot_clusters(df, x_column, y_column, n_clusters):
+    X = df[[x_column, y_column]].dropna().values
+    kmeans = KMeans(n_clusters=n_clusters, random_state=42).fit(X)
+    df['Cluster'] = kmeans.labels_
+    plt.figure(figsize=(20, 10))
+    for cluster in range(n_clusters):
+        cluster_data = df[df['Cluster'] == cluster]
+        plt.scatter(cluster_data[x_column], cluster_data[y_column], label=f'Cluster {cluster}')
+    plt.xlabel(x_column)
+    plt.ylabel(y_column)
+    plt.legend()
+    plt.show()
+    
+# Afficher les nuages de points avec clustering
+plot_clusters(df, 'Age', 'Glucose', 3)
+plot_clusters(df, 'Age', 'BloodPressure', 3)
+plot_clusters(df, 'Glucose', 'BloodPressure', 3)
+
 
 # Nuage de points Age vs Glucose avec droite de régression
 x = df.Age
