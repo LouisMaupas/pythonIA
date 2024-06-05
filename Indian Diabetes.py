@@ -192,4 +192,59 @@ X_train = df_train.loc[:, df.columns != 'DiabetesPresence']
 Y_train = df_train.loc[:, 'DiabetesPresence']
 # Extrait les étiquettes de l'ensemble d'entraînement
 X_test = df_test.loc[:, df.columns != 'DiabetesPresence']
-# Ex
+# Extrait les caractéristiques de l'ensemble de test
+Y_test = df_test.loc[:, 'DiabetesPresence']
+# Extrait les étiquettes de l'ensemble de test
+
+# Visualisation du modèle
+plot_model(model, to_file="model.png", show_shapes=True, show_layer_names=True, show_layer_activations=True)
+# Sauvegarde une visualisation de l'architecture du modèle dans un fichier image
+
+print("Plot_model\n")
+# Affiche un message de confirmation
+
+# Re-compilation du modèle
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# Recompile le modèle avec les mêmes paramètres
+
+# Entraînement du modèle avec validation
+history = model.fit(X_train, Y_train, validation_split=0.2, epochs=100, batch_size=10)
+# Entraîne le modèle sur l'ensemble d'entraînement avec 20% des données utilisées pour la validation, pendant 100 époques et avec une taille de batch de 10
+
+# Visualisation de l'exactitude du modèle
+plt.plot(history.history['accuracy'], color='#066b8b')
+# Trace l'exactitude de l'entraînement
+plt.plot(history.history['val_accuracy'], color='#b39200')
+# Trace l'exactitude de la validation
+plt.title('model accuracy')
+# Ajoute un titre au graphique
+plt.ylabel('accuracy')
+# Ajoute une étiquette à l'axe des ordonnées
+plt.xlabel('epoch')
+# Ajoute une étiquette à l'axe des abscisses
+plt.legend(['train', 'val'], loc='upper left')
+# Affiche la légende
+plt.show()
+# Affiche le graphique
+
+# Prédictions sur l'ensemble de test
+predictions = model.predict(X_test)
+# Génère les prédictions sur l'ensemble de test
+
+predictions[0]
+# Affiche la première prédiction
+
+predictions = (model.predict(X_test) > 0.5).astype(int)
+# Convertit les prédictions en valeurs binaires (0 ou 1)
+
+# Affiche les premières prédictions avec les valeurs attendues
+for i in range(5):
+    print('%s => Prédit : %d,  Attendu : %d' % (X_test.iloc[i].tolist(), predictions[i], Y_test.iloc[i]))
+
+# Évaluation du modèle sur l'ensemble de test
+_, accuracy = model.evaluate(X_test, Y_test)
+# Évalue le modèle sur l'ensemble de test
+print('Accuracy: %.2f' % (accuracy*100))
+# Affiche la précision du modèle en pourcentage
+
+# Ajouter des couches
