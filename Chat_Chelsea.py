@@ -15,8 +15,8 @@ import time
 # img = cv2.imread('./chelsea.png')
 # cv2.imshow("chelsea",img)
 
-img = cv2.imread('./chien.jpg')
-cv2.imshow("chien",img)
+# img = cv2.imread('./chien.jpg')
+# cv2.imshow("chien",img)
 
 img = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
 
