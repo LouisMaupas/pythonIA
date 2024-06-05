@@ -1,2 +1,3 @@
 1) Afficher nuages de données + droite de régression
 2) faire du clustering en python 
+3) commenter la ligne model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
