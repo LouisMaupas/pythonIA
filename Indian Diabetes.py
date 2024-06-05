@@ -28,8 +28,9 @@ from sklearn.cluster import KMeans
 # Charger les données
 df = pd.read_excel('indian diabetes.xlsx')
 # Charge les données d'un fichier Excel dans un DataFrame pandas
+print("accuracy")
 print(df)
-# Affiche le contenu du DataFrame pour vérification
+# Affiche le contenu du DataFrame
 
 # Fonction pour tracer la droite de régression
 def plot_regression_line(x, y):
@@ -187,14 +188,20 @@ df_test = df.drop(df_train.index)
 df_train.head()
 # Affiche les premières lignes de l'ensemble d'entraînement
 
-X_train = df_train.loc[:, df.columns != 'DiabetesPresence']
-# Extrait les caractéristiques de l'ensemble d'entraînement
-Y_train = df_train.loc[:, 'DiabetesPresence']
-# Extrait les étiquettes de l'ensemble d'entraînement
-X_test = df_test.loc[:, df.columns != 'DiabetesPresence']
-# Extrait les caractéristiques de l'ensemble de test
-Y_test = df_test.loc[:, 'DiabetesPresence']
-# Extrait les étiquettes de l'ensemble de test
+
+X_train = df_train.drop(columns=['DiabetesPresence'])
+Y_train = df_train['DiabetesPresence']
+X_test = df_test.drop(columns=['DiabetesPresence'])
+Y_test = df_test['DiabetesPresence']
+
+# X_train = df_train.loc[:, df.columns != 'DiabetesPresence']
+# # Extrait les caractéristiques de l'ensemble d'entraînement
+# Y_train = df_train.loc[:, 'DiabetesPresence']
+# # Extrait les étiquettes de l'ensemble d'entraînement
+# X_test = df_test.loc[:, df.columns != 'DiabetesPresence']
+# # Extrait les caractéristiques de l'ensemble de test
+# Y_test = df_test.loc[:, 'DiabetesPresence']
+# # Extrait les étiquettes de l'ensemble de test
 
 # Visualisation du modèle
 plot_model(model, to_file="model.png", show_shapes=True, show_layer_names=True, show_layer_activations=True)
