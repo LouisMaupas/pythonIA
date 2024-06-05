@@ -12,8 +12,8 @@ import time
 
 # load image and shrink
 
-# img = cv2.imread('./chelsea.png')
-# cv2.imshow("chelsea",img)
+img = cv2.imread('./chelsea.png')
+cv2.imshow("chelsea",img)
 
 # img = cv2.imread('./chien.jpg')
 # cv2.imshow("chien",img)
