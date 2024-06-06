@@ -43,13 +43,13 @@ plt.xticks([]), plt.yticks([])
 plt.show()
 time.sleep(1)
 
-# threshold the image and extract contours
-# Thresholding is a technique in OpenCV,
-# which is the assignment of pixel values in relation to the threshold value provided.
-# In thresholding, each pixel value is compared with the threshold value.
-# If the pixel value is smaller than the threshold, it is set to 0,
-# otherwise, it is set to a maximum value (generally 255)
-# input Image array must be in Grayscale.
+# Seuil l'image et extrait les contours
+# Le seuillage est une technique en OpenCV,
+# qui consiste à attribuer des valeurs de pixels en relation avec la valeur de seuil fournie.
+# Lors du seuillage, chaque valeur de pixel est comparée avec la valeur de seuil.
+# Si la valeur du pixel est inférieure au seuil, elle est fixée à 0,
+# sinon, elle est fixée à une valeur maximale (généralement 255).
+# L'image d'entrée doit être en niveaux de gris.
 
 ret, thresh1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)  # limite
 ret, thresh2 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
